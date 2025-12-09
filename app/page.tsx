@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 export default function Page() {
   return (
-    <div className={`min-h-screen bg-slate-50 text-slate-900`}>
+    <div className={`min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden`}>
       <Header />
       {/* Full-bleed hero outside the constrained container */}
       <Hero />

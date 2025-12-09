@@ -90,3 +90,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .shape-animated { animation: none !important; }
 }
+
+/* (removed shine and sparkle animations by request) */
+
+/* removed hero title animation */

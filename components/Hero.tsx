@@ -59,7 +59,7 @@ export default function Hero() {
           <div className="mt-10 flex items-center justify-center gap-4">
             {/* noinspection HtmlUnknownTarget */}
             <a
-              href="#services"
+              href="/#services"
               className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"
             >
               Katso palvelut
@@ -82,7 +82,7 @@ export default function Hero() {
           <motion.div variants={item} className="mt-10 flex items-center justify-center gap-4">
             {/* noinspection HtmlUnknownTarget */}
             <a
-              href="#services"
+              href="/#services"
               className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"
             >
               Katso palvelut
@@ -91,8 +91,8 @@ export default function Hero() {
         </motion.div>
       )}
 
-      {/* Ei-suora alareuna: tyylikäs aaltomuoto */}
-      <ShapeDivider variant="wave" color="#f8fafc" animated className="bottom-0" />
+      {/* Staattinen aaltojakaja ilman efektejä */}
+      <ShapeDivider variant="wave" color="#f8fafc" animated={false} className="bottom-0" />
     </section>
   );
 }
