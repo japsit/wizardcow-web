@@ -6,6 +6,25 @@ import ShapeDivider from './ShapeDivider';
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
+    const tags = [
+        'Yrityksen verkkosivut',
+        'Moderni web-suunnittelu',
+        'Verkkokaupat ja WooCommerce',
+        'WordPress-kehitys',
+        'Nopeat Next.js-sivustot',
+        'Hakukoneoptimointi (SEO)',
+        'Sivustojen ylläpito ja hosting',
+        'Tietoturva-auditoinnit',
+        'Räätälöidyt integraatiot',
+        'Odoo-kehitys',
+        'Automaatio ja API-ratkaisut',
+        'Räätälöidyt lomakkeet',
+        'Web-konsultointi',
+        'Digitaalisten palveluiden suunnittelu',
+        'Mobiiliapplikaatiot'
+    ];
+
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -50,21 +69,25 @@ export default function Hero() {
       {/* Centered content */}
       {isMobile ? (
         <div className="relative mx-auto max-w-4xl px-4 text-center drop-shadow-lg sm:px-6 lg:px-8">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Nopea ja moderni web‑kehitys yrityksellesi
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-white/85">
-            Rakennamme turvallisia ja suorituskykyisiä verkkosivustoja sekä räätälöityjä digiratkaisuja.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-4">
-            {/* noinspection HtmlUnknownTarget */}
-            <a
-              href="/#services"
-              className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"
-            >
-              Katso palvelut
-            </a>
-          </div>
+            <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                Modernia ohjelmistokehitystä yrityksesi tarpeisiin
+            </h1>
+
+            <p className="mt-6 text-lg leading-8 text-white/85">
+                Toteutamme räätälöityjä ratkaisuja, integraatioita ja automaatioita, jotka
+                tehostavat liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
+            </p>
+
+          <ul aria-label="Avainsanat" className="mt-10 flex flex-wrap items-center justify-center gap-2">
+            {tags.map((t) => (
+              <li
+                key={t}
+                className="rounded-full border border-slate-300 bg-white/80 px-3 py-1 text-xs font-medium text-slate-800 shadow-sm backdrop-blur"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
         <motion.div
@@ -74,20 +97,22 @@ export default function Hero() {
           animate="show"
         >
           <motion.h1 variants={item} className="text-balance text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Nopea ja moderni web‑kehitys yrityksellesi
+              Modernia ohjelmistokehitystä yrityksesi tarpeisiin
           </motion.h1>
           <motion.p variants={item} className="mt-6 text-lg leading-8 text-white/85">
-            Rakennamme turvallisia ja suorituskykyisiä verkkosivustoja sekä räätälöityjä digiratkaisuja.
+              Toteutamme räätälöityjä ratkaisuja, integraatioita ja automaatioita, jotka
+              tehostavat liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
           </motion.p>
-          <motion.div variants={item} className="mt-10 flex items-center justify-center gap-4">
-            {/* noinspection HtmlUnknownTarget */}
-            <a
-              href="/#services"
-              className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"
-            >
-              Katso palvelut
-            </a>
-          </motion.div>
+          <motion.ul variants={item} aria-label="Avainsanat" className="mt-10 flex flex-wrap items-center justify-center gap-2">
+            {tags.map((t) => (
+              <li
+                key={t}
+                className="rounded-full border border-slate-300 bg-white/80 px-3 py-1 text-xs font-medium text-slate-800 shadow-sm backdrop-blur"
+              >
+                {t}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
       )}
 

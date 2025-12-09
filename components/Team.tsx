@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import ShapeDivider from './ShapeDivider';
 
 type Member = {
   name: string;
@@ -148,15 +149,20 @@ function TeamCard({ m }: { m: Member }) {
 
 export default function Team() {
   return (
-    <section id="team" className="py-16">
-      <div className="mb-10 text-center">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Tiimimme</h2>
-        <p className="mt-3 text-slate-600">Kokeneet tekijät koodauksesta Odoo‑integraatioihin</p>
-      </div>
-      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-        {members.map((m) => (
-          <TeamCard key={m.name} m={m} />
-        ))}
+    <section id="team" className="relative overflow-hidden bg-violet-100 pt-16 pb-12">
+      {/* Top wave divider blending from previous section (slate-50) to this yellow section */}
+      <ShapeDivider variant="wave" color="#f8fafc" flip animated={false} className="top-0" />
+      {/* Constrained content container matching the rest of the site */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center">
+          {/*<h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl pt-16">Tiimimme</h2>*/}
+          {/*<p className="mt-3 text-slate-600">Kokeneet tekijät koodauksesta Odoo‑integraatioihin</p>*/}
+        </div>
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+          {members.map((m) => (
+            <TeamCard key={m.name} m={m} />
+          ))}
+        </div>
       </div>
     </section>
   );

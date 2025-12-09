@@ -30,7 +30,7 @@ export default function ShapeDivider({
       <svg
         aria-hidden
         className={`${base}`}
-        style={{ bottom: 0, height: '90px' }}
+        style={{ height: '90px' }}
         viewBox="0 0 1440 90"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
@@ -45,7 +45,7 @@ export default function ShapeDivider({
       <svg
         aria-hidden
         className={`${base}`}
-        style={{ bottom: 0, height: '120px' }}
+        style={{ height: '120px' }}
         viewBox="0 0 1440 120"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
@@ -65,7 +65,7 @@ export default function ShapeDivider({
     <svg
       aria-hidden
       className={`${base}`}
-      style={{ bottom: 0, height: '120px' }}
+      style={{ height: '120px' }}
       viewBox="0 0 1440 120"
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="none"

@@ -12,8 +12,9 @@ export default function Page() {
       <Hero />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Services />
-        <Team />
       </main>
+      {/* Full-bleed team section */}
+      <Team />
       <Footer />
     </div>
   );
