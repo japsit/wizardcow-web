@@ -10,6 +10,10 @@ export default function ClientProviders({ children }: Props) {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
 
+    // Skip smooth scrolling on small screens to reduce main-thread work
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
