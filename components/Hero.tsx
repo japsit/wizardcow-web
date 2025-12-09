@@ -57,6 +57,7 @@ export default function Hero() {
             Rakennamme turvallisia ja suorituskykyisiä verkkosivustoja sekä räätälöityjä digiratkaisuja.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
+            {/* noinspection HtmlUnknownTarget */}
             <a
               href="#services"
               className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"
@@ -79,6 +80,7 @@ export default function Hero() {
             Rakennamme turvallisia ja suorituskykyisiä verkkosivustoja sekä räätälöityjä digiratkaisuja.
           </motion.p>
           <motion.div variants={item} className="mt-10 flex items-center justify-center gap-4">
+            {/* noinspection HtmlUnknownTarget */}
             <a
               href="#services"
               className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand/90"

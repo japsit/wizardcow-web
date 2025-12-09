@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
+import Team from '../components/Team';
 import Footer from '../components/Footer';
 
 export default function Page() {
@@ -11,6 +12,7 @@ export default function Page() {
       <Hero />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Services />
+        <Team />
       </main>
       <Footer />
     </div>
