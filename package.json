@@ -31,5 +31,18 @@
   },
   "engines": {
     "node": ">=18.18"
+  },
+  "browserslist": {
+    "production": [
+      "defaults and supports es6-module",
+      "not ie <= 11",
+      "not op_mini all",
+      "not safari < 15"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
