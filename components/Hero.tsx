@@ -35,7 +35,7 @@ export default function Hero() {
       {/* Image background with optimized Next/Image for better LCP */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <Image
-          src="/waterfall.jpg"
+          src="/bg3.webp"
           alt=""
           fill
           priority

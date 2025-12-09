@@ -67,7 +67,6 @@ body {
   /* Match page and Services background to avoid visible seam */
   background-color: #f8fafc; /* slate-50 */
   /* Use local main image from /public */
-  background-image: url('/bg3.webp');
   background-size: cover;
   background-position: right center;
 }
