@@ -1,10 +1,15 @@
 "use client";
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import ShapeDivider from './ShapeDivider';
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedData, setPrefersReducedData] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [heroInView, setHeroInView] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
     const tags = [
         'Yrityksen verkkosivut',
         'Moderni web-suunnittelu',
@@ -28,7 +33,48 @@ export default function Hero() {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
     window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+
+    // Respect Data Saver
+    const dataQuery = window.matchMedia('(prefers-reduced-data: reduce)');
+    const updateDataPref = () => setPrefersReducedData(!!dataQuery.matches);
+    updateDataPref();
+    dataQuery.addEventListener?.('change', updateDataPref);
+
+    // Respect Reduced Motion
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotionPref = () => setPrefersReducedMotion(!!motionQuery.matches);
+    updateMotionPref();
+    motionQuery.addEventListener?.('change', updateMotionPref);
+
+    // Lazy-render video when hero enters viewport
+    const el = sectionRef.current;
+    if (el) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              setHeroInView(true);
+              io.disconnect();
+              break;
+            }
+          }
+        },
+        { root: null, rootMargin: '0px 0px 200px 0px', threshold: 0.01 }
+      );
+      io.observe(el);
+      return () => {
+        window.removeEventListener('resize', check);
+        dataQuery.removeEventListener?.('change', updateDataPref);
+        motionQuery.removeEventListener?.('change', updateMotionPref);
+        io.disconnect();
+      };
+    }
+
+    return () => {
+      window.removeEventListener('resize', check);
+      dataQuery.removeEventListener?.('change', updateDataPref);
+      motionQuery.removeEventListener?.('change', updateMotionPref);
+    };
   }, []);
 
   const container = {
@@ -48,26 +94,46 @@ export default function Hero() {
     },
   };
 
+  const useImageBackground = isMobile || prefersReducedData;
+  const animationsEnabled = !prefersReducedMotion && !isMobile;
+
   return (
-    <section id="hero" className="relative overflow-hidden py-24 sm:py-32">
+    <section ref={sectionRef} id="hero" className="relative overflow-hidden py-24 sm:py-32">
       {/* Video taustana */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <video
-          className="h-full w-full object-cover"
-          src="https://www.wizardcow.fi/wp-content/uploads/2021/01/data.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/bg2.jpg"
-        />
+        {useImageBackground ? (
+          <Image
+            src="/bg2.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            role="presentation"
+            aria-hidden
+          />
+        ) : (
+          heroInView && (
+            <video
+              className="h-full w-full object-cover"
+              src="https://www.wizardcow.fi/wp-content/uploads/2021/01/data.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              poster="/bg2.webp"
+              aria-hidden
+              role="presentation"
+            />
+          )
+        )}
         {/* Tumma kerros tekstin luettavuuden varmistamiseksi */}
-        <div className="absolute inset-0 bg-black/35 sm:bg-black/30" />
+        <div className="absolute inset-0 bg-black/50 sm:bg-black/30" />
       </div>
 
       {/* Centered content */}
-      {isMobile ? (
+      {isMobile || !animationsEnabled ? (
         <div className="relative mx-auto max-w-4xl px-4 text-center drop-shadow-lg sm:px-6 lg:px-8">
             <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-6xl">
                 Modernia ohjelmistokehitystä yrityksesi tarpeisiin
