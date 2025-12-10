@@ -39,6 +39,15 @@ export default function HeroAnimated({ tags }: { tags: string[] }) {
         Toteutamme räätälöityjä ratkaisuja, integraatioita ja automaatioita, jotka tehostavat
         liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
       </motion.p>
+      <motion.div className="mt-8 text-center">
+        <a
+            href="#contact"
+            className="inline-block rounded-full bg-[#ccff00] px-6 py-3 font-semibold text-slate-900 shadow-lg transition hover:scale-105 hover:bg-[#dfff33]"
+        >
+          Pyydä tarjous
+        </a>
+      </motion.div>
+
       <motion.ul
         variants={item}
         aria-label="Avainsanat"

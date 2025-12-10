@@ -135,6 +135,16 @@ export default function Hero() {
                 tehostavat liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
             </p>
 
+            <div className="mt-8">
+                <a
+                    href="#contact"
+                    className="inline-block rounded-full bg-[#ccff00] px-6 py-3 font-semibold text-slate-900 shadow-lg transition hover:scale-105 hover:bg-[#dfff33]"
+                >
+                    Pyydä tarjous
+                </a>
+            </div>
+
+
           <ul aria-label="Avainsanat" className="mt-10 flex flex-wrap items-center justify-center gap-2">
             {tags.map((t) => (
               <li
