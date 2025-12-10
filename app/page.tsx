@@ -20,7 +20,7 @@ export default function Page() {
           {/* BOXED SECTION */}
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <Services />
-              <MultiStepForm />
+              {/*<MultiStepForm />*/}
           </div>
 
           {/* FULL-WIDTH SECTIONS — each component handles its own background */}
