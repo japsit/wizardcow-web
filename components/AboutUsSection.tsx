@@ -3,7 +3,7 @@ import RotatingTextHero from './RotatingTextHero';
 
 export default function AboutUsSection() {
     return (
-        <section className="my-16 bg-[#6e0081] px-6 py-12 text-white shadow-sm sm:py-16">
+        <section className="my-16 bg-[#6e0081] px-6 py-0 text-white shadow-sm sm:py-0">
             <div className="mx-auto max-w-7xl grid items-center gap-10 md:grid-cols-2">
 
                 {/* Left: Responsive Logo */}
@@ -30,14 +30,14 @@ export default function AboutUsSection() {
                 {/* Right: Heading + text */}
                 <div className="px-1 sm:px-2">
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                        Tietoa meistä
+                        Vähemmän säätöä, enemmän tuloksia
                     </h2>
 
                     <p className="mt-4 text-white/90">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Me kesytämme IT-ongelmat — oli kyseessä villi integraatio,
+                        karkuteillä oleva automaatio tai ohjelmisto, joka käyttäytyy kuin äkäinen sonni.
+                        Siistimme prosessit, sujuvoitamme arjen ja varmistamme, että yrityksesi voi
+                        keskittyä kasvuun eikä jatkuvaan tulipalojen sammutukseen.
                     </p>
 
                     {/* RotatingTextHero at the end of the right column */}
