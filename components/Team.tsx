@@ -100,11 +100,12 @@ function TeamCard({ m }: { m: Member }) {
           className="group relative flex flex-col items-center rounded-xl bg-white p-8 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-md"
       >
         {/* Ribbon */}
+        {/*
         <div aria-hidden className="pointer-events-none absolute -right-3 top-4 rotate-45 z-10">
         <span className="block rounded-[3px] bg-brand px-9 py-2 text-[12px] sm:text-[13px] font-bold uppercase tracking-widest text-white shadow-lg ring-1 ring-white/15">
           Team
         </span>
-        </div>
+        </div>*/}
 
         <TeamImage src={m.image} alt={`${m.name} – ${m.title}`} initials={m.name} />
         {/* --- Email reveal + copy button --- */}

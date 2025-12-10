@@ -1,6 +1,5 @@
 "use client";
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ShapeDivider from './ShapeDivider';
 
@@ -51,18 +50,19 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative overflow-hidden py-24 sm:py-32">
-      {/* Image background with optimized Next/Image for better LCP */}
+      {/* Video taustana */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <Image
-          src="/bg3.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={60}
-          className="object-cover"
+        <video
+          className="h-full w-full object-cover"
+          src="https://www.wizardcow.fi/wp-content/uploads/2021/01/data.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/bg2.jpg"
         />
-        {/* Dark scrim to ensure text readability over the image */}
+        {/* Tumma kerros tekstin luettavuuden varmistamiseksi */}
         <div className="absolute inset-0 bg-black/35 sm:bg-black/30" />
       </div>
 
