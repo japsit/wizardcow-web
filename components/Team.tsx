@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Image from 'next/image';
 import ShapeDivider from './ShapeDivider';
 import EmailReveal from "./EmailReveal";
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
@@ -80,13 +81,13 @@ function TeamImage({ src, alt, initials }: { src?: string; alt: string; initials
   }
   return (
     <div className="relative h-36 w-36 select-none overflow-hidden rounded-full bg-white shadow-md">
-      <img
+      <Image
         src={src}
         alt={alt}
-        className="h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-        onError={() => setError(true)}
+        fill
+        sizes="144px"
+        className="object-cover"
+        onError={() => setError(true as any)}
       />
     </div>
   );
@@ -122,6 +123,7 @@ function TeamCard({ m }: { m: Member }) {
             onClick={() => setExpanded(v => !v)}
             aria-expanded={expanded}
             aria-controls={`team-extra-${m.name}`}
+            aria-label={expanded ? `Piilota lisätiedot jäseneltä ${m.name}` : `Näytä lisätiedot jäsenestä ${m.name}`}
             className="
     mt-5 flex items-center justify-center
     h-8 w-8

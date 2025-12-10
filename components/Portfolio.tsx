@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const projects = [
   {
     title: 'E‑commerce Revamp',
@@ -29,8 +31,15 @@ export default function Portfolio() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
           <div key={p.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-            <div className="aspect-[16/9] w-full bg-slate-100">
-              <img src={p.image} alt="" className="h-full w-full object-cover" />
+            <div className="relative aspect-[16/9] w-full bg-slate-100">
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+                priority={false}
+              />
             </div>
             <div className="p-5">
               <h3 className="text-lg font-semibold text-slate-900">{p.title}</h3>

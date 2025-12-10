@@ -1,8 +1,10 @@
 "use client";
-import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import ShapeDivider from './ShapeDivider';
+import dynamic from 'next/dynamic';
+
+const HeroAnimated = dynamic(() => import('./HeroAnimated'), { ssr: false });
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
@@ -30,9 +32,14 @@ export default function Hero() {
 
 
   useEffect(() => {
+    let resizeTimeout: number | undefined;
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
-    window.addEventListener('resize', check);
+    const onResize = () => {
+      if (resizeTimeout) window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(check, 150);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
 
     // Respect Data Saver
     const dataQuery = window.matchMedia('(prefers-reduced-data: reduce)');
@@ -63,7 +70,7 @@ export default function Hero() {
       );
       io.observe(el);
       return () => {
-        window.removeEventListener('resize', check);
+        window.removeEventListener('resize', onResize);
         dataQuery.removeEventListener?.('change', updateDataPref);
         motionQuery.removeEventListener?.('change', updateMotionPref);
         io.disconnect();
@@ -71,28 +78,11 @@ export default function Hero() {
     }
 
     return () => {
-      window.removeEventListener('resize', check);
+      window.removeEventListener('resize', onResize);
       dataQuery.removeEventListener?.('change', updateDataPref);
       motionQuery.removeEventListener?.('change', updateMotionPref);
     };
   }, []);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 18 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'spring', stiffness: 140, damping: 18 }
-    },
-  };
 
   const useImageBackground = isMobile || prefersReducedData;
   const animationsEnabled = !prefersReducedMotion && !isMobile;
@@ -107,6 +97,7 @@ export default function Hero() {
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover"
             role="presentation"
@@ -156,30 +147,7 @@ export default function Hero() {
           </ul>
         </div>
       ) : (
-        <motion.div
-          className="relative mx-auto max-w-4xl px-4 text-center drop-shadow-lg sm:px-6 lg:px-8"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.h1 variants={item} className="text-balance text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              Modernia ohjelmistokehitystä yrityksesi tarpeisiin
-          </motion.h1>
-          <motion.p variants={item} className="mt-6 text-lg leading-8 text-white/85">
-              Toteutamme räätälöityjä ratkaisuja, integraatioita ja automaatioita, jotka
-              tehostavat liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
-          </motion.p>
-          <motion.ul variants={item} aria-label="Avainsanat" className="mt-10 flex flex-wrap items-center justify-center gap-2">
-            {tags.map((t) => (
-              <li
-                key={t}
-                className="rounded-full border border-slate-300 bg-white/80 px-3 py-1 text-xs font-medium text-slate-800 shadow-sm backdrop-blur"
-              >
-                {t}
-              </li>
-            ))}
-          </motion.ul>
-        </motion.div>
+        <HeroAnimated tags={tags} />
       )}
 
       {/* Staattinen aaltojakaja ilman efektejä */}

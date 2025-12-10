@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
@@ -8,8 +8,17 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -29,8 +38,10 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
 
           {/* Logo */}
-          <div className="text-lg font-semibold tracking-tight">
-            Wizard Cow
+          <div className="text-4xl font-semibold tracking-tight">
+            <span className="font-medium">Wizard </span>
+            <span className="text-[#ff0000] font-light">Cow </span>
+            <span className="font-medium">Oy</span>
           </div>
 
           {/* Desktop navigation */}
@@ -42,8 +53,12 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
+              type="button"
               className="md:hidden p-2 rounded-lg hover:bg-white/10"
               onClick={() => setOpen(!open)}
+              aria-label={open ? "Sulje valikko" : "Avaa valikko"}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
           >
             {open ? (
                 <XMarkIcon className="w-6 h-6" />
@@ -55,7 +70,7 @@ export default function Header() {
 
         {/* Mobile Nav Dropdown */}
         {open && (
-            <div className="md:hidden px-6 pb-4 space-y-3 text-sm font-medium">
+            <div id="mobile-nav" className="md:hidden px-6 pb-4 space-y-3 text-sm font-medium">
               <a href="#services" onClick={() => setOpen(false)} className="block py-2">Palvelut</a>
               <a href="#team" onClick={() => setOpen(false)} className="block py-2">Tiimi</a>
               <a href="#contact" onClick={() => setOpen(false)} className="block py-2">Yhteys</a>
