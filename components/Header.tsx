@@ -1,48 +1,66 @@
 "use client";
-import Link from 'next/link';
-import { useState } from 'react';
 
-const nav = [{ href: '#services', label: 'Palvelut' }];
+import { useEffect, useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Käytetään glass-taustaa scrollissa TAI kun mobiilivalikko on auki
+  const useGlass = scrolled || open;
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="#" className="flex items-center gap-2 text-xl font-semibold tracking-tight text-brand">
-          <img src="/logo.svg" alt="Wizard Cow logo" className="h-8 w-auto sm:h-9" />
-          <span>Wizard Cow Oy</span>
-        </Link>
-        <nav className="hidden items-center gap-8 md:flex">
-          {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm font-medium text-slate-700 hover:text-brand">
-              {n.label}
-            </a>
-          ))}
-        </nav>
-        <button
-          aria-label="Valikon avaaminen"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
-            <path d="M3.75 6.75h16.5v1.5H3.75zm0 4.5h16.5v1.5H3.75zm0 4.5h16.5v1.5H3.75z" />
-          </svg>
-        </button>
-      </div>
-      {open && (
-        <div className="border-t border-slate-200/60 bg-white md:hidden">
-          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-4">
-              {nav.map((n) => (
-                <a key={n.href} href={n.href} className="text-base font-medium text-slate-700 hover:text-brand" onClick={() => setOpen(false)}>
-                  {n.label}
-                </a>
-              ))}
-            </div>
+      <header
+          className={`
+        fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${useGlass
+              ? "bg-white/90 backdrop-blur-xl border-b border-white/30 shadow-sm text-slate-900"
+              : "bg-transparent text-white"
+          }
+      `}
+      >
+        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+
+          {/* Logo */}
+          <div className="text-lg font-semibold tracking-tight">
+            Wizard Cow
           </div>
+
+          {/* Desktop navigation */}
+          <nav className="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#services" className="hover:opacity-70 transition">Palvelut</a>
+            <a href="#team" className="hover:opacity-70 transition">Tiimi</a>
+            <a href="#contact" className="hover:opacity-70 transition">Yhteys</a>
+          </nav>
+
+          {/* Mobile menu button */}
+          <button
+              className="md:hidden p-2 rounded-lg hover:bg-white/10"
+              onClick={() => setOpen(!open)}
+          >
+            {open ? (
+                <XMarkIcon className="w-6 h-6" />
+            ) : (
+                <Bars3Icon className="w-6 h-6" />
+            )}
+          </button>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Nav Dropdown */}
+        {open && (
+            <div className="md:hidden px-6 pb-4 space-y-3 text-sm font-medium">
+              <a href="#services" onClick={() => setOpen(false)} className="block py-2">Palvelut</a>
+              <a href="#team" onClick={() => setOpen(false)} className="block py-2">Tiimi</a>
+              <a href="#contact" onClick={() => setOpen(false)} className="block py-2">Yhteys</a>
+            </div>
+        )}
+      </header>
   );
 }
