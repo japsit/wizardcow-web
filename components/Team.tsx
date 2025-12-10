@@ -1,6 +1,9 @@
 "use client";
 import { useState } from 'react';
 import ShapeDivider from './ShapeDivider';
+import EmailReveal from "./EmailReveal";
+import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
+
 
 type Member = {
   name: string;
@@ -18,7 +21,7 @@ const members: Member[] = [
     title: 'WordPress, koulutukset & projektinhallinta',
     blurb: 'WordPress‑sivustot ja sisällönhallinta, käytännön koulutukset sekä ketterä projektinhallinta tuloksiin.',
     image: '/jukka.jpeg',
-    email: 'mailto:info@wizardcow.fi',
+    email: 'jukka.hyttinen@wizardcow.fi',
     about:
       'Autan yrityksiä rakentamaan selkeitä ja nopeasti päivitettäviä WordPress‑sivustoja. ' +
       'Vahvuuteni on käytännönläheinen koulutus ja projektinhallinta: pidän kokonaisuuden kasassa ja varmistun, että liiketoimintatavoitteet toteutuvat.',
@@ -29,7 +32,7 @@ const members: Member[] = [
     title: 'Ohjelmistokehitys, Odoo & integraatiot',
     blurb: 'Tehokas ohjelmistokehitys ja Odoo‑ratkaisut – integraatiot, rajapinnat ja suorituskykyiset web‑palvelut.',
     image: '/juha.jpeg',
-    email: 'mailto:info@wizardcow.fi',
+    email: 'juha.sarkkinen@wizardcow.fi',
     about:
       'Suunnittelen ja toteutan suorituskykyisiä web‑ratkaisuja modernilla stackilla (Next.js, TypeScript). ' +
       'Odoon integraatiot, rajapinnat ja datavirrat ovat erikoisaluettani – tavoite on sujuva automaatio ja mitattava hyöty. ' +
@@ -41,7 +44,7 @@ const members: Member[] = [
     title: 'Yhteydenotto',
     blurb: 'Autamme nopeasti - kysy tarjous tai jätä viesti, palaamme pian ilman muu-uu-uu-ta!',
     image: '/cow.png',
-    email: 'mailto:info@wizardcow.fi',
+    email: 'asiakaspalvelu@wizardcow.fi',
     about:
       'Ota rohkeasti yhteyttä – vastaamme ripeästi ja ohjaamme tarpeesi oikealle asiantuntijalle. ' +
       'Voit pyytää tarjouksen tai kysyä neuvoa pienestäkin asiasta.',
@@ -91,61 +94,71 @@ function TeamImage({ src, alt, initials }: { src?: string; alt: string; initials
 
 function TeamCard({ m }: { m: Member }) {
   const [expanded, setExpanded] = useState(false);
+
   return (
-    <div
-      className="group relative flex flex-col items-center rounded-xl bg-white p-8 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-md"
-    >
-      {/* Corner ribbon (thicker, larger, stays within card) */}
-      <div aria-hidden className="pointer-events-none absolute -right-3 top-4 rotate-45 z-10">
+      <div
+          className="group relative flex flex-col items-center rounded-xl bg-white p-8 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-md"
+      >
+        {/* Ribbon */}
+        <div aria-hidden className="pointer-events-none absolute -right-3 top-4 rotate-45 z-10">
         <span className="block rounded-[3px] bg-brand px-9 py-2 text-[12px] sm:text-[13px] font-bold uppercase tracking-widest text-white shadow-lg ring-1 ring-white/15">
           Team
         </span>
+        </div>
+
+        <TeamImage src={m.image} alt={`${m.name} – ${m.title}`} initials={m.name} />
+        {/* --- Email reveal + copy button --- */}
+        <h3 className="mt-6 text-lg font-semibold text-slate-900">{m.name}</h3>
+        <p className="text-sm text-slate-600">{m.title}</p>
+        {m.email && <EmailReveal email={m.email} />}
+        <p className="mt-3 text-sm text-slate-600">{m.blurb}</p>
+
+
+
+        {/* Toggle more info */}
+        <button
+            type="button"
+            onClick={() => setExpanded(v => !v)}
+            aria-expanded={expanded}
+            aria-controls={`team-extra-${m.name}`}
+            className="
+    mt-5 flex items-center justify-center
+    h-8 w-8
+    rounded-full
+    border border-slate-300
+    bg-white
+    text-slate-700
+    shadow-sm
+    transition
+    hover:bg-slate-50
+  "
+        >
+          {expanded ? (
+              <ChevronDoubleUpIcon className="w-5 h-5" />
+          ) : (
+              <ChevronDoubleDownIcon className="w-5 h-5" />
+          )}
+        </button>
+
+
+        {/* Tags */}
+        {expanded && m.tags && m.tags.length > 0 && (
+            <ul className="mt-5 flex flex-wrap justify-center gap-2">
+              {m.tags.map((t) => (
+                  <li
+                      key={t}
+                      className="rounded-full border border-slate-300 bg-white/60 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+                  >
+                    {t}
+                  </li>
+              ))}
+            </ul>
+        )}
       </div>
-      <TeamImage src={m.image} alt={`${m.name} – ${m.title}`} initials={m.name} />
-      <h3 className="mt-6 text-lg font-semibold text-slate-900">{m.name}</h3>
-      <p className="text-sm text-slate-600">{m.title}</p>
-      <p className="mt-3 text-sm text-slate-600">{m.blurb}</p>
-
-      {/* Toggle */}
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="mt-5 inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm hover:bg-slate-50"
-        aria-expanded={expanded}
-        aria-controls={`team-extra-${m.name}`}
-      >
-        {expanded ? 'Piilota' : 'Lue lisää'}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`h-4 w-4 transition-transform ${expanded ? 'rotate-180' : ''}`}
-          aria-hidden="true"
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </button>
-
-      {/* Hidden section: tags (and could add more later) */}
-      {expanded && m.tags && m.tags.length > 0 && (
-        <ul
-          id={`team-extra-${m.name}`}
-          aria-label="Tekniikat"
-          className="mt-5 flex flex-wrap justify-center gap-2"
-        >
-          {m.tags.map((t) => (
-            <li
-              key={t}
-              className="rounded-full border border-slate-300 bg-white/60 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
   );
 }
+
+
 
 export default function Team() {
   return (

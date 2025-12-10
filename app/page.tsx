@@ -3,6 +3,9 @@ import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
+import MultiStepForm from "../components/MultiStepForm";
+
+
 
 export default function Page() {
   return (
@@ -12,8 +15,10 @@ export default function Page() {
       <Hero />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Services />
+          <MultiStepForm />
       </main>
-      {/* Full-bleed team section */}
+
+        {/* Full-bleed team section */}
       <Team />
       <Footer />
     </div>
