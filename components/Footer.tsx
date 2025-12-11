@@ -1,9 +1,12 @@
+"use client";
+import PrivacyPolicyLink from "./PrivacyPolicyLink";
+
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="-mt-px border-t border-slate-800 bg-black text-white">
       <div className="px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-        <div className="grid grid-cols-1 items-center gap-8 text-sm sm:gap-10 md:grid-cols-12">
+        <div className="grid grid-cols-1 items-start gap-8 text-sm sm:gap-10 md:grid-cols-12">
           {/* Col 1: Logo only */}
           <div className="flex items-center justify-center md:col-span-3 md:justify-start">
             <img
@@ -14,11 +17,23 @@ export default function Footer() {
           </div>
 
           {/* Col 2: Tagline (left aligned on md+) */}
-          <div className="text-center md:col-span-9 md:text-left">
+          <div className="text-center md:col-span-6 md:text-left">
             <p className="mx-auto md:mx-0 max-w-[90vw] md:max-w-none text-xl font-semibold text-white sm:text-2xl md:text-3xl">
-              Wizad Cow Oy on iloinen ja innovatiivinen yhteistyökumppani!
+              Wizard Cow Oy on iloinen ja innovatiivinen yhteistyökumppani!
             </p>
             <p className="mt-4 text-sm text-white/70 md:text-left">© {year} Wizard Cow Oy</p>
+          </div>
+
+          {/* Col 3: Company info + Privacy policy modal link */}
+          <div className="md:col-span-3">
+            <div className="space-y-1 text-center md:text-right">
+              <p className="font-semibold">Wizard Cow Oy</p>
+              <p className="text-white/80">3141537-2</p>
+              <p className="text-white/80">Helsinki</p>
+            </div>
+            <div className="mt-3 text-center md:text-right">
+              <PrivacyPolicyLink />
+            </div>
           </div>
         </div>
       </div>

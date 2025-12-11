@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import MultiStepForm from "../components/MultiStepForm";
 import AboutUsSection from "../components/AboutUsSection";
 import RotatingTextHero from "../components/RotatingTextHero";
+import ContactForm from "../components/ContactForm";
 
 
 
@@ -25,7 +26,13 @@ export default function Page() {
 
           {/* FULL-WIDTH SECTIONS — each component handles its own background */}
           <AboutUsSection />
-          <Team />
+          <div className="-mt-20 bg-[#6e0081]/100">
+          <Team/>
+          </div>
+          {/* Contact section anchor target for "Pyydä tarjous" buttons */}
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ContactForm />
+          </div>
 
           <Footer />
       </div>

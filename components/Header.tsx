@@ -46,9 +46,9 @@ export default function Header() {
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#services" className="hover:opacity-70 transition">Palvelut</a>
+            <a href="#why_choose_us" className="hover:opacity-70 transition">Miksi me?</a>
             <a href="#team" className="hover:opacity-70 transition">Tiimi</a>
-            <a href="#contact" className="hover:opacity-70 transition">Yhteys</a>
+            <a href="#contact" className="hover:opacity-70 transition">Ota yhteyttä</a>
           </nav>
 
           {/* Mobile menu button */}

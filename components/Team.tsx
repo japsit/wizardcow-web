@@ -167,7 +167,7 @@ export default function Team() {
   return (
     <section id="team" className="relative overflow-hidden bg-violet-100 pt-16 pb-12">
       {/* Top wave divider blending from the previous section (slate-50) to this yellow section */}
-      <ShapeDivider variant="wave" color="#f8fafc" flip animated={false} className="top-0" />
+      <ShapeDivider variant="wave" color="#6e0081" flip animated={false} className="top-0" />
       {/* Constrained content container matching the rest of the site */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">

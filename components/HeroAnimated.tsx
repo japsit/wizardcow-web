@@ -1,7 +1,13 @@
 "use client";
 import { motion } from 'framer-motion';
+import RequestQuoteButton from './RequestQuoteButton';
 
-export default function HeroAnimated({ tags }: { tags: string[] }) {
+type Props = {
+  tags: string[];
+  onRequestQuote?: () => void;
+};
+
+export default function HeroAnimated({ tags, onRequestQuote }: Props) {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -40,12 +46,7 @@ export default function HeroAnimated({ tags }: { tags: string[] }) {
         liiketoimintaasi ja tukevat kasvua. Laadukasta koodia – turvallisesti ja suorituskykyisesti.
       </motion.p>
       <motion.div className="mt-8 text-center">
-        <a
-            href="#contact"
-            className="inline-block rounded-full bg-[#ccff00] px-6 py-3 font-semibold text-slate-900 shadow-lg transition hover:scale-105 hover:bg-[#dfff33]"
-        >
-          Pyydä tarjous
-        </a>
+        <RequestQuoteButton onRequestQuote={onRequestQuote} />
       </motion.div>
 
       <motion.ul

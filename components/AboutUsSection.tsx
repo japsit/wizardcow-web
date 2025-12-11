@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import RotatingTextHero from './RotatingTextHero';
+import RequestQuoteButton from './RequestQuoteButton';
 
 export default function AboutUsSection() {
     return (
-        <section className="my-16 bg-[#6e0081] px-6 py-0 text-white shadow-sm sm:py-0">
+        <section className="my-16 bg-[#6e0081] px-6 py-16 pt-0 text-white shadow-sm sm:py-0">
             <div className="mx-auto max-w-7xl grid items-center gap-10 md:grid-cols-2">
 
                 {/* Left: Responsive Logo */}
@@ -61,6 +62,11 @@ export default function AboutUsSection() {
                                 'kesyttää bugit',
                             ]}
                         />
+                    </div>
+                    {/* Simple anchor variant – no extra imports or state needed */}
+                    <div className="mt-8 flex gap-4">
+                        <RequestQuoteButton />
+                        <RequestQuoteButton label="Ota yhteyttä" mode="link"/>
                     </div>
                 </div>
             </div>

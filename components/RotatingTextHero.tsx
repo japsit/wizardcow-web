@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import RequestQuoteButton from './RequestQuoteButton';
 
 type Props = {
   items: string[];

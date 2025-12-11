@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import ShapeDivider from './ShapeDivider';
 import dynamic from 'next/dynamic';
+import RequestQuoteButton from "./RequestQuoteButton";
+
 
 const HeroAnimated = dynamic(() => import('./HeroAnimated'), { ssr: false });
 
 export default function Hero() {
-  const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedData, setPrefersReducedData] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [heroInView, setHeroInView] = useState(false);
@@ -88,6 +90,7 @@ export default function Hero() {
   const animationsEnabled = !prefersReducedMotion && !isMobile;
 
   return (
+      <div>
     <section ref={sectionRef} id="hero" className="relative overflow-hidden py-24 sm:py-32">
       {/* Video taustana */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -136,12 +139,7 @@ export default function Hero() {
             </p>
 
             <div className="mt-8">
-                <a
-                    href="#contact"
-                    className="inline-block rounded-full bg-[#ccff00] px-6 py-3 font-semibold text-slate-900 shadow-lg transition hover:scale-105 hover:bg-[#dfff33]"
-                >
-                    Pyydä tarjous
-                </a>
+                <RequestQuoteButton />
             </div>
 
 
@@ -157,11 +155,12 @@ export default function Hero() {
           </ul>
         </div>
       ) : (
-        <HeroAnimated tags={tags} />
+        <HeroAnimated tags={tags} onRequestQuote={undefined} />
       )}
 
       {/* Staattinen aaltojakaja ilman efektejä */}
       <ShapeDivider variant="wave" color="#f8fafc" animated={false} className="bottom-0" />
     </section>
-  );
+      </div>
+);
 }
